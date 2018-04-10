@@ -6,7 +6,11 @@ import java.util.List;
 
 public class FeedService {
 
-    private StoryRepository storyRepository = new StoryRepository();
+    private StoryRepository storyRepository;
+
+    public FeedService(StoryRepository storyRepository) {
+        this.storyRepository = storyRepository;
+    }
 
     public List<Story> fetchAll() {
         return storyRepository.findAll();

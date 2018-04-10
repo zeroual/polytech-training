@@ -8,8 +8,13 @@ import java.util.List;
 
 public class FeedController {
 
-    private PublicationService publicationService = new PublicationService();
-    private FeedService feedService = new FeedService();
+    private PublicationService publicationService;
+    private FeedService feedService ;
+
+    public FeedController(PublicationService publicationService, FeedService feedService) {
+        this.publicationService = publicationService;
+        this.feedService = feedService;
+    }
 
     public void post(String content) {
         publicationService.share(new Story(content));
