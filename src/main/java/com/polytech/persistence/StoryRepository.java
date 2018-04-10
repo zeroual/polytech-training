@@ -2,18 +2,12 @@ package com.polytech.persistence;
 
 import com.polytech.services.Story;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class StoryRepository {
+public interface StoryRepository {
 
-    private static List<Story> database = new ArrayList<>();
 
-    public void save(Story content) {
-        database.add(content);
-    }
+    void save(Story content);
 
-    public List<Story> findAll() {
-        return database;
-    }
+    List<Story> findAll();
 }

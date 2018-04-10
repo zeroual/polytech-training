@@ -1,9 +1,5 @@
-package com;
 
 import com.polytech.config.AppConfig;
-import com.polytech.persistence.StoryRepository;
-import com.polytech.services.FeedService;
-import com.polytech.services.PublicationService;
 import com.polytech.services.Story;
 import com.polytech.web.FeedController;
 import org.junit.Assert;
@@ -20,15 +16,12 @@ public class PublicationTest {
     private FeedController feedController;
 
     @Before
-    public void setUp(){
-       // StoryRepository storyRepository = new StoryRepository();
-        //PublicationService publicationService = new PublicationService(storyRepository);
-        //FeedService feedService = new FeedService(storyRepository);
-        //feedController = new FeedController(publicationService, feedService);
+    public void setUp() {
         AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         feedController = container.getBean(FeedController.class);
 
     }
+
     @Test
     public void should_post_story() {
 
