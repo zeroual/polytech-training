@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pnet">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,6 +55,34 @@
 
 <div class="container">
 
+    <div ng-controller="DemoController as ctrl">
+        tot:{{ctrl.content}}
+
+        <form action="" method="post" role="form">
+            <legend>Form Title</legend>
+
+            <div class="form-group">
+                <input type="text"
+                       ng-model="ctrl.content"
+                       class="form-control"
+                       placeholder="Input...">
+            </div>
+
+
+            <input type="button"
+                   ng-click="ctrl.share()"
+                   class="btn btn-primary" value="Sahre">
+            </input>
+        </form>
+
+        <ul class="list-group">
+
+            <li class="list-group-item" ng-repeat="story in ctrl.feeds">
+                <span>{{story.content}}</span>
+            </li>
+
+        </ul>
+    </div>
 
 </div><!-- /.container -->
 
@@ -63,5 +91,32 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script type="text/javascript">
+    angular.module("pnet", [])
+        .controller('DemoController', function ($http) {
+
+            var self = this;
+            self.content = "";
+            self.feeds = [];
+
+            $http.get('/api/feed').then(function (response) {
+                self.feeds = response.data;
+            });
+
+            self.share = function () {
+                var body = {"content": self.content};
+
+                $http.post('/api/feed', body)
+                    .then(function (response) {
+                        var story = response.data;
+                        self.feeds.push(story);
+                        self.content = "";
+                    });
+            }
+        });
+</script>
+
 </body>
 </html>
