@@ -4,6 +4,7 @@ import com.polytech.services.Story;
 import com.polytech.web.FeedController;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -23,6 +24,7 @@ public class PublicationTest {
     }
 
     @Test
+    @Ignore
     public void should_post_story() {
 
         //GIVEN
