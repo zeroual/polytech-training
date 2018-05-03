@@ -1,6 +1,5 @@
 package com.polytech.config;
 
-import com.polytech.persistence.InMemoryStoryRepository;
 import com.polytech.persistence.JdbcStoryRepository;
 import com.polytech.persistence.StoryRepository;
 import com.polytech.services.FeedService;
@@ -46,7 +45,6 @@ public class AppConfig {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                //.addScripts("schema.sql")
                 .build();
     }
 }

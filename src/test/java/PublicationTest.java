@@ -1,7 +1,8 @@
 
 import com.polytech.config.AppConfig;
+import com.polytech.services.FeedService;
+import com.polytech.services.PublicationService;
 import com.polytech.services.Story;
-import com.polytech.web.FeedController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -14,12 +15,16 @@ import java.util.List;
 public class PublicationTest {
 
 
-    private FeedController feedController;
+    private PublicationService publicationService;
+    private FeedService feedService;
+
 
     @Before
     public void setUp() {
         AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
-        feedController = container.getBean(FeedController.class);
+        publicationService = container.getBean(PublicationService.class);
+        feedService = container.getBean(FeedService.class);
+
 
     }
 
@@ -31,12 +36,12 @@ public class PublicationTest {
         String story = "hi Info4";
 
         //WHEN
-        feedController.post(story);
+        publicationService.share(new Story(story));
 
         //THEN
 
-       // List<Story> postedStories = feedController.feed();
-       // Assert.assertEquals(Arrays.asList(new Story("hi Info4")), postedStories);
+        List<Story> postedStories = feedService.fetchAll();
+        Assert.assertEquals(Arrays.asList(new Story("hi Info4")), postedStories);
 
     }
 }

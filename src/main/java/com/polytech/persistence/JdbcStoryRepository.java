@@ -1,7 +1,6 @@
 package com.polytech.persistence;
 
 import com.polytech.services.Story;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
